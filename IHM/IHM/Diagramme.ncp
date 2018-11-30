@@ -1,0 +1,131 @@
+<Project>
+  <Name>IHM</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Model</Name>
+    <Language>Java</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Model</Name>
+        <Access>Public</Access>
+        <Location left="374" top="314" />
+        <Size width="181" height="257" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public Model(Controller controller)</Member>
+        <Member type="Method">public Controller getController()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Speaker</Name>
+        <Access>Public</Access>
+        <Location left="292" top="660" />
+        <Size width="228" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private static final String NAME</Member>
+        <Member type="Field">private static final int TIME_OUT</Member>
+        <Member type="Field">private static final int DATA_RATE</Member>
+        <Member type="Field">private SerialPort port</Member>
+        <Member type="Field">private BufferedReader input</Member>
+        <Member type="Field">private OutputStream output</Member>
+        <Member type="Field">private final Model model</Member>
+        <Member type="Constructor">public Speaker(Model model)</Member>
+        <Member type="Method">public void close()</Member>
+        <Member type="Method">public void serialEvent(SerialPortEvent spe)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>View</Name>
+        <Access>Public</Access>
+        <Location left="796" top="314" />
+        <Size width="181" height="257" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public View(Controller controller)</Member>
+        <Member type="Method">public Frame getFrame()</Member>
+        <Member type="Method">public Controller getController()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Frame</Name>
+        <Access>Public</Access>
+        <Location left="684" top="660" />
+        <Size width="181" height="146" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>MessageBox</Name>
+        <Access>Public</Access>
+        <Location left="959" top="660" />
+        <Size width="257" height="146" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Button ok</Member>
+        <Member type="Constructor">public MessageBox(Frame frame, String message)</Member>
+        <Member type="Method">public void actionPerformed(ActionEvent ae)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Controller</Name>
+        <Access>Public</Access>
+        <Location left="577" top="32" />
+        <Size width="181" height="141" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public Controller()</Member>
+        <Member type="Method">public void notify(String message)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Association" first="5" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>617</X>
+          <Y>198</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <StartRole>- model</StartRole>
+        <StartMultiplicity>1</StartMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="5" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>733</X>
+          <Y>202</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <StartRole>- view</StartRole>
+        <StartMultiplicity>1</StartMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="0" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>459</X>
+          <Y>597</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <StartRole>- speaker</StartRole>
+        <StartMultiplicity>1</StartMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="2" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <StartRole>- frame</StartRole>
+        <StartMultiplicity>1</StartMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="4" second="3">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
