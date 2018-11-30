@@ -1,4 +1,4 @@
-/* Auteur : Christophe Sulyven  */
+/* Auteur : CARTERON Matthieu  */
 
 // Inclusion de la librairie :
 #include "DHT.h"
