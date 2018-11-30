@@ -18,6 +18,7 @@ void setup()
 }
 
 void loop() {
+  //Tant que la temperature n'excède pas le point de rosee 
   do {
     humidite = dht.readHumidity() / 100.0f;
     temperature = dht.readTemperature();
