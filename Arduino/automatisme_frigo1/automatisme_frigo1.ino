@@ -1,4 +1,4 @@
-/* Auteur : Christophe Sulyven  */
+/* Auteur : CARTERON Matthieu  */
 
 // Inclusion des en-têtes :
 #include "automatisme1.h"
