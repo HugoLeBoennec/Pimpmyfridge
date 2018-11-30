@@ -1,2 +1,2 @@
-# Pimpmyfrige
+# Pimpmyfridge
 First seconde year projet!
