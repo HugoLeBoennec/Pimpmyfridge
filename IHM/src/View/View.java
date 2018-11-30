@@ -1,6 +1,6 @@
-package View;
+package view;
 
-import Controller.Controller;
+import controller.Controller;
 
 /**
  *
@@ -23,8 +23,24 @@ public class View
     {
         // On définit les attributs :
         this.controller = controller;
-        this.frame = new Frame();
+        this.frame = new Frame(this.controller);
         
         this.frame.setVisible(true);
+    }
+    
+    /**
+     * @return le cadre de l'interface.
+     */
+    public Frame getFrame()
+    {
+        return this.frame;
+    }
+    
+    /**
+     * @return le contrôleur.
+     */
+    public Controller getController()
+    {
+        return this.controller;
     }
 }
