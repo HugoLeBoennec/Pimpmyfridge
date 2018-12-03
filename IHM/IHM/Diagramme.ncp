@@ -7,18 +7,25 @@
       <Entity type="Class">
         <Name>Model</Name>
         <Access>Public</Access>
-        <Location left="374" top="314" />
-        <Size width="181" height="257" />
+        <Location left="351" top="314" />
+        <Size width="253" height="230" />
         <Collapsed>False</Collapsed>
+        <Member type="Field">private ArrayList&lt;Double&gt; temperatures</Member>
+        <Member type="Field">private ArrayList&lt;Double&gt; humidites</Member>
         <Member type="Constructor">public Model(Controller controller)</Member>
         <Member type="Method">public Controller getController()</Member>
+        <Member type="Method">public Speaker getSpeaker()</Member>
+        <Member type="Method">public void addTemperature(double temperature)</Member>
+        <Member type="Method">public void addHumidite(double humidite)</Member>
+        <Member type="Method">public ArrayList&lt;Double&gt; getTemperatures()</Member>
+        <Member type="Method">public ArrayList&lt;Double&gt; getHumidite()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Speaker</Name>
         <Access>Public</Access>
-        <Location left="292" top="660" />
-        <Size width="228" height="247" />
+        <Location left="351" top="660" />
+        <Size width="228" height="264" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private static final String NAME</Member>
         <Member type="Field">private static final int TIME_OUT</Member>
@@ -29,6 +36,7 @@
         <Member type="Field">private final Model model</Member>
         <Member type="Constructor">public Speaker(Model model)</Member>
         <Member type="Method">public void close()</Member>
+        <Member type="Method">public void serialSend(int consigne)</Member>
         <Member type="Method">public void serialEvent(SerialPortEvent spe)</Member>
         <Modifier>None</Modifier>
       </Entity>
@@ -46,16 +54,34 @@
       <Entity type="Class">
         <Name>Frame</Name>
         <Access>Public</Access>
-        <Location left="684" top="660" />
-        <Size width="181" height="146" />
+        <Location left="753" top="660" />
+        <Size width="304" height="383" />
         <Collapsed>False</Collapsed>
+        <Member type="Field">private Button button</Member>
+        <Member type="Field">private Choice choice</Member>
+        <Member type="Field">private Label label_t</Member>
+        <Member type="Field">private Label label_h</Member>
+        <Member type="Field">private Label label_r</Member>
+        <Member type="Field">private Label label_c</Member>
+        <Member type="Field">private Label num_t</Member>
+        <Member type="Field">private Label num_h</Member>
+        <Member type="Field">private Label num_r</Member>
+        <Member type="Field">private Label num_c</Member>
+        <Member type="Field">private Panel panel_center</Member>
+        <Member type="Field">private Panel panel_top</Member>
+        <Member type="Field">private Panel panel_topleft</Member>
+        <Member type="Field">private Panel panel_topright</Member>
+        <Member type="Constructor">public Frame(Controller controller)</Member>
+        <Member type="Method">public void initComponents()</Member>
+        <Member type="Method">public void exitForm(WindowEvent evt)</Member>
+        <Member type="Method">public void button_requestActionPerformed(ActionEvent evt)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>MessageBox</Name>
         <Access>Public</Access>
-        <Location left="959" top="660" />
-        <Size width="257" height="146" />
+        <Location left="1142" top="701" />
+        <Size width="257" height="128" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private Button ok</Member>
         <Member type="Constructor">public MessageBox(Frame frame, String message)</Member>
@@ -65,11 +91,25 @@
       <Entity type="Class">
         <Name>Controller</Name>
         <Access>Public</Access>
-        <Location left="577" top="32" />
-        <Size width="181" height="141" />
+        <Location left="570" top="28" />
+        <Size width="242" height="179" />
         <Collapsed>False</Collapsed>
         <Member type="Constructor">public Controller()</Member>
+        <Member type="Method">public void setConsigne(int consigne)</Member>
+        <Member type="Method">public void setValues(String[] values)</Member>
+        <Member type="Method">public ArrayList&lt;Double&gt; getTemperatures()</Member>
+        <Member type="Method">public ArrayList&lt;Double&gt; getHumidite()</Member>
         <Member type="Method">public void notify(String message)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Graph</Name>
+        <Access>Public</Access>
+        <Location left="769" top="1100" />
+        <Size width="257" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public Graph(Controller controller)</Member>
+        <Member type="Method">public void paint(Graphics g)</Member>
         <Modifier>None</Modifier>
       </Entity>
     </Entities>
@@ -78,32 +118,36 @@
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>617</X>
-          <Y>198</Y>
+          <X>610</X>
+          <Y>232</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Composition</AssociationType>
         <StartRole>- model</StartRole>
+        <EndRole>- controller</EndRole>
         <StartMultiplicity>1</StartMultiplicity>
       </Relationship>
       <Relationship type="Association" first="5" second="2">
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>733</X>
-          <Y>202</Y>
+          <X>774</X>
+          <Y>234</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Composition</AssociationType>
         <StartRole>- view</StartRole>
+        <EndRole>- controller</EndRole>
         <StartMultiplicity>1</StartMultiplicity>
       </Relationship>
       <Relationship type="Association" first="0" second="1">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>459</X>
-          <Y>597</Y>
+          <X>476</X>
+          <Y>570</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
@@ -111,6 +155,8 @@
         <StartMultiplicity>1</StartMultiplicity>
       </Relationship>
       <Relationship type="Association" first="2" second="3">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -119,12 +165,50 @@
         <StartMultiplicity>1</StartMultiplicity>
       </Relationship>
       <Relationship type="Association" first="4" second="3">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="3" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <StartRole>- graph</StartRole>
+        <StartMultiplicity>1</StartMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="6" second="5">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>704</X>
+          <Y>1180</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>674</X>
+          <Y>232</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartRole>- controller</StartRole>
+        <StartMultiplicity>1</StartMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="3" second="5">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>698</X>
+          <Y>799</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>698</X>
+          <Y>235</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartRole>- controller</StartRole>
+        <StartMultiplicity>1</StartMultiplicity>
       </Relationship>
     </Relationships>
   </ProjectItem>

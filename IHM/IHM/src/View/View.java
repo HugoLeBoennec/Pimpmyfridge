@@ -23,7 +23,7 @@ public class View
     {
         // On définit les attributs :
         this.controller = controller;
-        this.frame = new Frame();
+        this.frame = new Frame(this.controller);
         
         this.frame.setVisible(true);
     }

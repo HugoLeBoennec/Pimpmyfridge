@@ -20,7 +20,7 @@ import java.util.TooManyListenersException;
 public class Speaker implements SerialPortEventListener
 {
     /** Nom du port connecté à l'Arduino. */
-    private static final String NAME = "COM3";
+    private static final String NAME = "COM8";
     
     /** le temps en millisecondes de blocage en attendant l'ouverture du port. */
     private static final int TIME_OUT = 2000;
@@ -66,7 +66,7 @@ public class Speaker implements SerialPortEventListener
         
 	if (portId == null)
         {
-            this.model.getController().notify("Port introuvable !");
+            System.err.println("Port introuvable !");
             return;
 	}
 
@@ -92,7 +92,7 @@ public class Speaker implements SerialPortEventListener
         }
         catch (final PortInUseException | UnsupportedCommOperationException | IOException | TooManyListenersException e)
         {
-            this.model.getController().notify(e.toString());
+            System.err.println(e.toString());
         }
     }
     
@@ -109,6 +109,23 @@ public class Speaker implements SerialPortEventListener
     }
     
     /**
+     * Permet d'envoyer une nouvelle consigne à l'Arduino.
+     * 
+     * @param consigne la consigne
+     */
+    public synchronized void serialSend(final int consigne)
+    {
+        try
+        {
+            this.output.write(consigne);
+        }
+        catch (final IOException e)
+        {
+            this.model.getController().notify(e.toString());
+        }
+    }
+    
+    /**
      * Permet de gérer les évènements sur le port série.
      * 
      * @param spe l'évènement à traiter.
@@ -121,7 +138,8 @@ public class Speaker implements SerialPortEventListener
             try
             {
 		String inputLine = input.readLine();
-		System.out.println(inputLine);
+                
+                this.model.getController().setValues(inputLine.split(";"));
             }
             catch (final IOException e)
             {
