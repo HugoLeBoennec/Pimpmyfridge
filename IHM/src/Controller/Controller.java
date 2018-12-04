@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import model.Model;
 import view.MessageBox;
@@ -33,13 +34,33 @@ public class Controller
     }
     
     /**
-     * Envoie une nouvelle consigne.
-     * 
-     * @param consigne la consigne
+     * Augmente la valeur de consigne de 1 degré celsius.
      */
-    public void setConsigne(final int consigne)
+    public void increaseConsigne()
     {
-        this.model.getSpeaker().serialSend(consigne);
+        if (this.model.getConsigne() < 26)
+        {
+            this.model.setConsigne(this.model.getConsigne() + 1);
+        }
+    }
+    
+    /**
+     * Diminue la valeur de consigne de 1 degré celsius.
+     */
+    public void decreaseConsigne()
+    {
+        if (this.model.getConsigne() > 15)
+        {
+            this.model.setConsigne(this.model.getConsigne() - 1);
+        }
+    }
+    
+    /**
+     * Envoie une nouvelle consigne.
+     */
+    public void sendConsigne()
+    {
+        this.model.getSpeaker().serialSend(this.model.getConsigne());
     }
     
     /**
@@ -52,7 +73,21 @@ public class Controller
         this.view.getFrame().num_t.setText(values[0] + " °C");
         this.view.getFrame().num_h.setText(Double.valueOf(values[1]) * 100.0d + " %");
         this.view.getFrame().num_r.setText(values[2] + " °C");
-        this.view.getFrame().num_c.setText("0".equals(values[3]) ? "Non" : "Oui");
+        
+        if (values[3].equals("0"))
+        {
+            this.view.getFrame().num_c.setText("Non");
+            this.view.getFrame().num_c.setForeground(Color.black);
+            
+            this.model.setAvertissement(false);
+        }
+        else
+        {
+            this.view.getFrame().num_c.setText("Oui");
+            this.view.getFrame().num_c.setForeground(Color.red);
+            
+            this.model.setAvertissement(true);
+        }
         
         this.timer--;
         
@@ -74,9 +109,9 @@ public class Controller
     /**
      * Retourne le tableau des températures mesurées.
      * 
-     * @return tableau de températures
+     * @return tableau de températures.
      */
-    public ArrayList<Double> getTemperatures()
+    public final ArrayList<Double> getTemperatures()
     {
         return this.model.getTemperatures();
     }
@@ -84,11 +119,31 @@ public class Controller
     /**
      * Retourne le tableau des humidités mesurées.
      * 
-     * @return tableau de températures
+     * @return tableau de températures.
      */
-    public ArrayList<Double> getHumidite()
+    public final ArrayList<Double> getHumidite()
     {
         return this.model.getHumidites();
+    }
+    
+    /**
+     * Retourne le flag d'avertissement.
+     * 
+     * @return le flag d'avertissement
+     */
+    public boolean getAvertissement()
+    {
+        return this.model.getAvertissement();
+    }
+    
+    /**
+     * Retourne la consigne.
+     * 
+     * @return la consigne.
+     */
+    public int getConsigne()
+    {
+        return this.model.getConsigne();
     }
     
     /**

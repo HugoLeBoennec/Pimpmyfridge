@@ -5,6 +5,10 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -15,6 +19,9 @@ public class Graph extends Canvas
     /** Réference vers le contrôleur. */
     private final Controller controller;
     
+    /** Représente l'image d'avertissement. */
+    private Image avertissement = null;
+    
     /**
      * Le constructeur.
      * 
@@ -23,6 +30,15 @@ public class Graph extends Canvas
     public Graph(final Controller controller)
     {
         this.controller = controller;
+        
+        try
+        {
+            this.avertissement = ImageIO.read(new File("Icon.png"));
+        }
+        catch (final IOException e)
+        {
+            this.controller.notify("Echec du chargement de l'image d'avertissement !");
+        }
     }
     
     /**
@@ -103,6 +119,15 @@ public class Graph extends Canvas
                 x = xb;
                 xb += 32;
             }
+        }
+        
+        // Dessin de l'avertissement si présent :
+        if (this.controller.getAvertissement())
+        {
+            g.setColor(Color.red);
+            g.drawImage(this.avertissement, 48, 8, null);
+            g.drawBytes("Avertissement condensation !".getBytes(), 0, 28, 86, 20);
+            g.drawBytes("Veuillez baisser la temperature.".getBytes(), 0, 32, 86, 36);
         }
     }
 }

@@ -48,13 +48,18 @@ public class Frame extends java.awt.Frame
         num_r = new java.awt.Label();
         num_c = new java.awt.Label();
         panel_topright = new java.awt.Panel();
-        choice = new java.awt.Choice();
+        panel_spinner = new java.awt.Panel();
+        button_minus = new java.awt.Button();
+        panel_condition = new java.awt.Panel();
+        num_condition = new java.awt.Label();
+        button_plus = new java.awt.Button();
         button_request = new java.awt.Button();
         graph = new view.Graph(this.controller);
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(258, 216));
         setPreferredSize(new java.awt.Dimension(720, 480));
+        setSize(new java.awt.Dimension(720, 480));
         setTitle("Pimp My Fridge - IHM");
         addWindowListener(new java.awt.event.WindowAdapter()
         {
@@ -104,12 +109,14 @@ public class Frame extends java.awt.Frame
         num_t.setAlignment(java.awt.Label.CENTER);
         num_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         num_t.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
+        num_t.setForeground(new java.awt.Color(255, 0, 0));
         num_t.setText("0");
         panel_center.add(num_t);
 
         num_h.setAlignment(java.awt.Label.CENTER);
         num_h.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         num_h.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
+        num_h.setForeground(new java.awt.Color(0, 0, 255));
         num_h.setText("0");
         panel_center.add(num_h);
 
@@ -128,22 +135,43 @@ public class Frame extends java.awt.Frame
 
         panel_top.add(panel_center);
 
-        panel_topright.setBackground(new java.awt.Color(214, 233, 231));
+        panel_topright.setBackground(new java.awt.Color(255, 255, 255));
         panel_topright.setLayout(new javax.swing.BoxLayout(panel_topright, javax.swing.BoxLayout.Y_AXIS));
 
-        choice.add("15.0 °C");
-        choice.add("16.0 °C");
-        choice.add("17.0 °C");
-        choice.add("18.0 °C");
-        choice.add("19.0 °C");
-        choice.add("20.0 °C");
-        choice.add("21.0 °C");
-        choice.add("22.0 °C");
-        choice.add("23.0 °C");
-        choice.add("24.0 °C");
-        choice.add("25.0 °C");
-        choice.add("26.0 °C");
-        panel_topright.add(choice);
+        panel_spinner.setLayout(new javax.swing.BoxLayout(panel_spinner, javax.swing.BoxLayout.X_AXIS));
+
+        button_minus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        button_minus.setLabel("-");
+        button_minus.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                button_minusActionPerformed(evt);
+            }
+        });
+        panel_spinner.add(button_minus);
+
+        panel_condition.setLayout(new javax.swing.BoxLayout(panel_condition, javax.swing.BoxLayout.LINE_AXIS));
+
+        num_condition.setAlignment(java.awt.Label.CENTER);
+        num_condition.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
+        num_condition.setText("15 °C");
+        panel_condition.add(num_condition);
+
+        button_plus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        button_plus.setLabel("+");
+        button_plus.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                button_plusActionPerformed(evt);
+            }
+        });
+        panel_condition.add(button_plus);
+
+        panel_spinner.add(panel_condition);
+
+        panel_topright.add(panel_spinner);
 
         button_request.setLabel("Confirmer");
         button_request.setMinimumSize(new java.awt.Dimension(160, 24));
@@ -173,37 +201,38 @@ public class Frame extends java.awt.Frame
 
     private void button_requestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_requestActionPerformed
     {//GEN-HEADEREND:event_button_requestActionPerformed
-        // On change la valeur de la consigne en fonction de l'index choisi parmi la liste :
-        switch (this.choice.getSelectedIndex())
-        {
-            case 0  : this.controller.setConsigne(15); break;
-            case 1  : this.controller.setConsigne(16); break;
-            case 2  : this.controller.setConsigne(17); break;
-            case 3  : this.controller.setConsigne(18); break;
-            case 4  : this.controller.setConsigne(19); break;
-            case 5  : this.controller.setConsigne(20); break;
-            case 6  : this.controller.setConsigne(21); break;
-            case 7  : this.controller.setConsigne(22); break;
-            case 8  : this.controller.setConsigne(23); break;
-            case 9  : this.controller.setConsigne(24); break;
-            case 10 : this.controller.setConsigne(25); break;
-            default : this.controller.setConsigne(26); break;
-        }
+        this.controller.sendConsigne();
     }//GEN-LAST:event_button_requestActionPerformed
 
+    private void button_plusActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_plusActionPerformed
+    {//GEN-HEADEREND:event_button_plusActionPerformed
+        this.controller.increaseConsigne();
+        this.num_condition.setText(this.controller.getConsigne() + " °C");
+    }//GEN-LAST:event_button_plusActionPerformed
+
+    private void button_minusActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_minusActionPerformed
+    {//GEN-HEADEREND:event_button_minusActionPerformed
+        this.controller.decreaseConsigne();
+        this.num_condition.setText(this.controller.getConsigne() + " °C");
+    }//GEN-LAST:event_button_minusActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Button button_minus;
+    private java.awt.Button button_plus;
     private java.awt.Button button_request;
-    private java.awt.Choice choice;
-    public view.Graph graph;
+    public java.awt.Canvas graph;
     private java.awt.Label label_c;
     private java.awt.Label label_h;
     private java.awt.Label label_r;
     private java.awt.Label label_t;
     public java.awt.Label num_c;
+    private java.awt.Label num_condition;
     public java.awt.Label num_h;
     public java.awt.Label num_r;
     public java.awt.Label num_t;
     private java.awt.Panel panel_center;
+    private java.awt.Panel panel_condition;
+    private java.awt.Panel panel_spinner;
     private java.awt.Panel panel_top;
     private java.awt.Panel panel_topleft;
     private java.awt.Panel panel_topright;

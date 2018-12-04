@@ -3,7 +3,6 @@ package view;
 import controller.Controller;
 
 /**
- *
  * @author rubisetcie
  */
 public class View

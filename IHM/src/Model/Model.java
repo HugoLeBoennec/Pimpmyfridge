@@ -21,6 +21,12 @@ public class Model
     /** Historique des humidités mesurées. */
     private final ArrayList<Double> humidites;
     
+    /** Si l'avertissement de condensation est présent. */
+    private boolean avertissement;
+    
+    /** La consigne du frigo. */
+    private int consigne;
+    
     /**
      * Le constructeur.
      * 
@@ -34,6 +40,9 @@ public class Model
         
         this.temperatures = new ArrayList<>();
         this.humidites = new ArrayList<>();
+        
+        this.avertissement = false;
+        this.consigne = 15;
     }
     
     /**
@@ -81,11 +90,31 @@ public class Model
     }
     
     /**
+     * Active ou désactive le flag d'avertissement.
+     * 
+     * @param etat l'état de l'avertissement.
+     */
+    public void setAvertissement(final boolean etat)
+    {
+        this.avertissement = etat;
+    }
+    
+    /**
+     * Change la consigne.
+     * 
+     * @param consigne la nouvelle consigne.
+     */
+    public void setConsigne(final int consigne)
+    {
+        this.consigne = consigne;
+    }
+    
+    /**
      * Retourne l'historique des températures mesurées.
      * 
      * @return tableau de températures
      */
-    public ArrayList<Double> getTemperatures()
+    public final ArrayList<Double> getTemperatures()
     {
         return this.temperatures;
     }
@@ -95,8 +124,28 @@ public class Model
      * 
      * @return tableau d'humidités
      */
-    public ArrayList<Double> getHumidites()
+    public final ArrayList<Double> getHumidites()
     {
         return this.humidites;
+    }
+    
+    /**
+     * Retourne le flag d'avertissement.
+     * 
+     * @return le flag d'avertissement
+     */
+    public boolean getAvertissement()
+    {
+        return this.avertissement;
+    }
+    
+    /**
+     * Retourne la consigne.
+     * 
+     * @return la consigne
+     */
+    public int getConsigne()
+    {
+        return this.consigne;
     }
 }
