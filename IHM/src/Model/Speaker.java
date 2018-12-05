@@ -143,7 +143,7 @@ public class Speaker implements SerialPortEventListener
             }
             catch (final IOException e)
             {
-                this.model.getController().notify(e.toString());
+                this.model.getController().notify(e.getMessage());
             }
 	}
     }

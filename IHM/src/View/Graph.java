@@ -37,7 +37,7 @@ public class Graph extends Canvas
         }
         catch (final IOException e)
         {
-            this.controller.notify("Echec du chargement de l'image d'avertissement !");
+            this.controller.notify(e.getMessage());
         }
     }
     

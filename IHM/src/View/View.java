@@ -1,6 +1,9 @@
 package view;
 
 import controller.Controller;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  * @author rubisetcie
@@ -23,6 +26,15 @@ public class View
         // On définit les attributs :
         this.controller = controller;
         this.frame = new Frame(this.controller);
+        
+        try
+        {
+            this.frame.setIconImage(ImageIO.read(new File("Star.png")));
+        }
+        catch (final IOException e)
+        {
+            this.controller.notify(e.getMessage());
+        }
         
         this.frame.setVisible(true);
     }
