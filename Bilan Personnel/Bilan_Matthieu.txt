@@ -1,0 +1,12 @@
+﻿[Bilan Matthieu CARTERON]
+
+Le mini-frigo "Pimp-my-fridge" était un projet dont on avait tous beaucoup entendu parler déjà en première année ;
+cependant je ne savais toujours pas a quoi m'attendre. Au terme des deux semaines de travail, j'ai trouvé ce projet
+plutôt agréable à réaliser : mêlant justement l'utilisation de physique, d'électronique et de développement logiciel.
+Nous n'avons pas eu d'énorme problème durant ces deux semaines : tout avançait avec une certaine fluidité et nous
+surmontions les obstacles avec aise.
+En revanche, le principal remors que je donnerais était le manque flagrant d'organisation au sein de l'équipe : aucune
+utilisation d'outil centralisé (j'étais le seul à utiliser le Github créé pour l'occasion) ; de plus, notre chef de
+projet donnait l'impression de ne pas être suffisamment impliqué dans la gestion.
+Ainsi pour ce premier projet de deuxième année, j'en tire une nouvelle expérience de travail à travers un projet
+hautement versatile.
